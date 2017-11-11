@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://localhost/test', { useMongoClient: true });
 
 var db = mongoose.connection;
 
@@ -12,11 +12,34 @@ db.once('open', function() {
 });
 
 var itemSchema = mongoose.Schema({
-  quantity: Number,
-  description: String
+  cityName: String,
+  state: String, 
+  timeStamp: String,
+  temprature: Number,
+  airQaulityIndex: Number
 });
 
 var Item = mongoose.model('Item', itemSchema);
+
+var save = function (cityName, state, timeStamp, temprature, airQaulityIndex) {
+  console.log('airQaulityIndex is ', airQaulityIndex);
+  var obj = {
+    cityName: cityName,
+    state: state,
+    timeStamp: timeStamp,
+    temprature: temprature,
+    airQaulityIndex: airQaulityIndex
+  }; 
+
+  var doc = new Item(obj);
+  doc.save(function(err, success) {
+    if (err) {
+      console.log('error has occured while saving data into db', err);
+    } else {
+      console.log('data has successfully been saved', success);
+    }
+  })
+}
 
 var selectAll = function(callback) {
   Item.find({}, function(err, items) {
@@ -29,3 +52,4 @@ var selectAll = function(callback) {
 };
 
 module.exports.selectAll = selectAll;
+module.exports.save = save;
