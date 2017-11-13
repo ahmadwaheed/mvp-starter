@@ -40,6 +40,7 @@ class App extends React.Component {
       }
     });
   }
+
   searchInvoker() {
     this.search(this.state.term);
   }
@@ -50,14 +51,13 @@ class App extends React.Component {
       url: '/items',
       method: 'post',
       data: {term},
-      success: function(data) {
+      success: function() {
         console.log('data has successfully been request');
       }, 
       error: function(err) {
         console.log('following error has occured', err);
       }
     });
-    this.historyDisplayer();
   }
 
 
@@ -100,8 +100,10 @@ class App extends React.Component {
   render () {
     return (<div>
       <h1>Air Quality Index</h1>
-      <input value={this.state.term} onChange={this.onceChanged}/>       
-      <button onClick={this.searchInvoker}>Press</button>
+      <input type='text' value={this.state.term} onChange={this.onceChanged}/>       
+      <button onClick={this.searchInvoker}>Search</button>
+      <button onClick={this.currentElement}>View Current Element</button>
+      <button onClick={this.historyDisplayer}>View History</button>
 
       <List items={this.state.items}/>
     </div>);
