@@ -4,18 +4,11 @@ const ListItem = (props) => (
   <div>
     <table>
   <tr>
-    <th>City</th>
-    <th>State</th> 
-    <th>Time</th>
-    <th>Tempratue</th>
-    <th>Air Quality Index</th>
-  </tr>
-  <tr>
-    <td>{props.item.cityName}</td>
-    <td>{props.item.state}</td> 
-    <td>{props.item.timeStamp}</td>
-    <td>{props.item.temprature}</td>
-    <td>{props.item.airQaulityIndex}</td>
+    <td><strong>City:</strong>{props.item.cityName}</td>
+    <td><strong>State:</strong>{props.item.state}</td> 
+    <td><strong>Time:</strong>{props.item.timeStamp}</td>
+    <td><strong>Tempratue:</strong>{props.item.temprature}</td>
+    <td><strong>Air Quality Index:</strong>{props.item.airQaulityIndex}</td>
   </tr>
 </table>
   </div>
