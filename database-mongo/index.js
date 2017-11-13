@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test', { useMongoClient: true });
+mongoose.connect('mongodb://localhost/test', { useMongoClient: true }); // in 'mongodb://localhost/test' a db is being created with 
+                                                                        //  by the name specified in end point. (/test)
 
 var db = mongoose.connection;
 
@@ -19,10 +20,10 @@ var itemSchema = mongoose.Schema({
   airQaulityIndex: Number
 });
 
-var Item = mongoose.model('Item', itemSchema);
+var Item = mongoose.model('Item', itemSchema); // in this step, a model is being created using schema described above and 
+                                                //collection or tables name is being assigned 'items' in ('Item', itemSchema) part
 
 var save = function (cityName, state, timeStamp, temprature, airQaulityIndex) {
-  console.log('airQaulityIndex is ', airQaulityIndex);
   var obj = {
     cityName: cityName,
     state: state,

@@ -25,10 +25,11 @@ function timeManager(date) {
 }
 
 app.post('/items', function(req, res) {
-	console.log(req.body);
+	//console.log(req);
+	//console.log('post req has been recieved with input000000000000000', req.body.term);
 	dataGrabber.getInfoByCityName(req.body.term)
 		.then(function(data) {
-			console.log(' hey its in app.post ', data.data.current.pollution.aqius);
+			//console.log(' hey its in app.post ', data.data.current.pollution.aqius);
 			db.save(data.data.city, 
 				data.data.state, 
 				timeManager(new Date()).toString(), 
@@ -44,12 +45,32 @@ app.post('/items', function(req, res) {
 		});
 });
 
+// var array = [];
+// app.post('/current', function(req, res) {
+// 	console.log('post req to /current has been recieved', req.body.term);
+// 	dataGrabber.getInfoByCityName(req.body.term)
+// 		.then(function(data) {
+// 			res.statusCode = 201;
+// 			array.push(data.data.city, 
+// 			data.data.state, 
+// 			timeManager(new Date()).toString(), 
+// 			Math.round((data.data.current.weather.tp * 1.8) + 32),
+// 			data.data.current.pollution.aqius);
+// 			console.log('length of array is', array.length)
+// 		})
+// 		.catch(function(error){
+// 			res.status(500).send(error);
+// 		});
+// });
+
 app.get('/items', function (req, res) {
   items.selectAll(function(err, data) {
     if(err) {
       res.sendStatus(500);
     } else {
+    	console.log('data is ', data)
       res.json(data);
+
     }
   });
 });
